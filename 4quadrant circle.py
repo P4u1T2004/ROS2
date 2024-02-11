@@ -15,10 +15,10 @@ class Turtlecontrollernode(Node):
         super()._init_("Turtlecontroller")
         
         self.cmd_vel_pub_ =self.create_publisher(
-            Twist,"/turtle2/cmd_vel",10)
+            Twist,"/turtle1/cmd_vel",10)
         
         self.possubscriber_=self.create_subscription(
-            Pose,"/turtle2/pose", self.pose_callback,10)
+            Pose,"/turtle1/pose", self.pose_callback,10)
         self.get_logger().info("Turtle controller has been started")
 
     def pose_callback(self,pose:Pose):
@@ -27,18 +27,18 @@ class Turtlecontrollernode(Node):
         
         cmd.linear.x=2.0
         cmd.angular.z=1.0
-        if pose.x >5.5 and pose.y >5.5:
+        if pose.x >5.54 and pose.y >5.54:
             self.callsetpenservice(255,0,0,3,0)
-        elif pose.x <5.5 and pose.y >5.5 :
+        elif pose.x <5.54 and pose.y >5.54 :
             self.callsetpenservice(0,255,0,3,0)
             
             
 
-        elif pose.x <5.5 and pose.y <5.5 :
+        elif pose.x <5.54 and pose.y <5.54 :
             self.callsetpenservice(100,155,0,3,0)
             
             
-        elif pose.x >5.5 and pose.y <5.5:
+        elif pose.x >5.54 and pose.y <5.54:
             self.callsetpenservice(0,255,255,3,0)
         
         
@@ -46,7 +46,7 @@ class Turtlecontrollernode(Node):
 
 
     def callsetpenservice(self,r,g,b,width,off):
-        client=self.create_client(SetPen,"/turtle2/set_pen")
+        client=self.create_client(SetPen,"/turtle1/set_pen")
         while not client.wait_for_service(1.0):
             self.get_logger().warn("Waiting for service...")
 
