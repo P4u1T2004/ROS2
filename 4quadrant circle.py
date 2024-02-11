@@ -70,7 +70,7 @@ class Turtlecontrollernode(Node):
             self.get_logger().error("Service call failed: %r" % (e,))
 
 
-# ... (remaining code)
+
 
 def main(args=None):
     rclpy.init(args=args)
